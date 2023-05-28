@@ -8,6 +8,10 @@ import { CreateBoardDto } from './dto/create-board.dto';
 export class BoardsService {
   constructor(private boardRepository: BoardRepository) {}
 
+  async getAllBoards(): Promise<Board[]> {
+    return this.boardRepository.find();
+  }
+
   async getBoardById(id: number): Promise<Board> {
     const found = await this.boardRepository.findOneBy({ id });
     if (!found) {
