@@ -13,6 +13,7 @@
     "paths": {
       "@/*": ["./src/*"],
       "@boards/*": ["./src/boards/*"],
+      "@auth/*": ["./src/auth/*"],
       "@configs/*": ["./src/configs/*"]
     },
     "incremental": true,
