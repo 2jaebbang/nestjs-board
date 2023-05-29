@@ -3,6 +3,7 @@ import { DataSource, Repository } from 'typeorm';
 import { Board } from '@boards/board.entity';
 import { BoardStatus } from '@boards/board-status.enum';
 import { CreateBoardDto } from '@boards/dto/create-board.dto';
+import { User } from '@/auth/user.entity';
 
 @Injectable()
 export class BoardRepository extends Repository<Board> {
@@ -10,13 +11,17 @@ export class BoardRepository extends Repository<Board> {
     super(Board, dataSource.createEntityManager());
   }
 
-  async createBoard(createBoardDto: CreateBoardDto): Promise<Board> {
+  async createBoard(
+    createBoardDto: CreateBoardDto,
+    user: User,
+  ): Promise<Board> {
     const { title, description } = createBoardDto;
 
     const board = this.create({
       title,
       description,
       status: BoardStatus.PUBLIC,
+      user: user,
     });
 
     await this.save(board);

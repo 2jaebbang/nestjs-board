@@ -3,6 +3,7 @@ import { BoardStatus } from '@boards/board-status.enum';
 import { BoardRepository } from '@boards/board.repository';
 import { Board } from '@boards/board.entity';
 import { CreateBoardDto } from '@boards/dto/create-board.dto';
+import { User } from '@/auth/user.entity';
 
 @Injectable()
 export class BoardsService {
@@ -20,8 +21,8 @@ export class BoardsService {
     return found;
   }
 
-  createBoard(createBoardDto: CreateBoardDto): Promise<Board> {
-    return this.boardRepository.createBoard(createBoardDto);
+  createBoard(createBoardDto: CreateBoardDto, user: User): Promise<Board> {
+    return this.boardRepository.createBoard(createBoardDto, user);
   }
 
   async updateBoardStatus(id: number, status: BoardStatus): Promise<Board> {
